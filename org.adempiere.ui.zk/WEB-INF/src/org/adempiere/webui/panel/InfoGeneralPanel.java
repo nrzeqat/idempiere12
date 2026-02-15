@@ -768,7 +768,6 @@ public class InfoGeneralPanel extends InfoPanel implements EventListener<Event>
 	    }
 	    else
 	    {
-	        // 🔥 Main Query يحتوي AssetType + LIKE
 
 	        for (Object param : m_sqlFragmentMain.parameters())
 	        {
