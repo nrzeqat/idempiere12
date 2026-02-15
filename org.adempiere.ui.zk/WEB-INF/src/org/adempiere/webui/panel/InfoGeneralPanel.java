@@ -725,6 +725,7 @@ public class InfoGeneralPanel extends InfoPanel implements EventListener<Event>
 	 *  @param forCount for counting records
 	 *  @throws SQLException
 	 */
+	/*
 	protected void setParameters(PreparedStatement pstmt, boolean forCount) throws SQLException
 	{
 		int index = 1;
@@ -742,6 +743,52 @@ public class InfoGeneralPanel extends InfoPanel implements EventListener<Event>
 		if (txt4.getText().length() > 0)
 			pstmt.setString(index++, getSQLText(txt4));
 	}   //  setParameters
+*/
+	
+	@Override
+	protected void setParameters(PreparedStatement pstmt, boolean forCount) throws SQLException
+	{
+	    int index = 1;
+	    int expectedParams = pstmt.getParameterMetaData().getParameterCount();
+
+	    if (forCount)
+	    {
+	        // 🔥 Count SQL يحتوي فقط على LIKE ?
+	        if (txt1.getText().length() > 0 && index <= expectedParams)
+	            pstmt.setString(index++, getSQLText(txt1));
+
+	        if (txt2.getText().length() > 0 && index <= expectedParams)
+	            pstmt.setString(index++, getSQLText(txt2));
+
+	        if (txt3.getText().length() > 0 && index <= expectedParams)
+	            pstmt.setString(index++, getSQLText(txt3));
+
+	        if (txt4.getText().length() > 0 && index <= expectedParams)
+	            pstmt.setString(index++, getSQLText(txt4));
+	    }
+	    else
+	    {
+	        // 🔥 Main Query يحتوي AssetType + LIKE
+
+	        for (Object param : m_sqlFragmentMain.parameters())
+	        {
+	            if (index <= expectedParams)
+	                pstmt.setObject(index++, param);
+	        }
+
+	        if (txt1.getText().length() > 0 && index <= expectedParams)
+	            pstmt.setString(index++, getSQLText(txt1));
+
+	        if (txt2.getText().length() > 0 && index <= expectedParams)
+	            pstmt.setString(index++, getSQLText(txt2));
+
+	        if (txt3.getText().length() > 0 && index <= expectedParams)
+	            pstmt.setString(index++, getSQLText(txt3));
+
+	        if (txt4.getText().length() > 0 && index <= expectedParams)
+	            pstmt.setString(index++, getSQLText(txt4));
+	    }
+	}
 
     @Override
 	protected void insertPagingComponent()
