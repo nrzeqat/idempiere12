@@ -40,3 +40,19 @@ out/
 */.maven.run/**
 **/.idea/*
 partial-runtime/
+
+# Eclipse / IntelliJ / IDE temp files
+*.classpath
+*.project
+.settings/
+*.iml
+*.launch
+*.prefs
+out/
+partial-runtime/
+.idea/**/Partial_*.xml
+
+# System files
+.DS_Store
+Thumbs.db
+

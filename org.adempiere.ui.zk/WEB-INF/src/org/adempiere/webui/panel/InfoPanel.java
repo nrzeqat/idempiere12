@@ -1703,6 +1703,8 @@ public abstract class InfoPanel extends Window implements EventListener<Event>, 
 			pstmt = DB.prepareStatement(countSql, null);
 			if (queryTimeout > 0)
 				pstmt.setQueryTimeout(queryTimeout);
+			System.out.println("FINAL SQL = " + countSql);
+			System.out.println("PARAMS = " + m_sqlFragmentMain.parameters());
 			setParameters (pstmt, true);
 			rs = pstmt.executeQuery();
 
